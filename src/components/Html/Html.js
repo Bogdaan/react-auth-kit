@@ -1,14 +1,5 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
-
 import React, { Component, PropTypes } from 'react';
-import { googleAnalyticsId } from '../../config';
+
 
 class Html extends Component {
 
@@ -25,33 +16,22 @@ class Html extends Component {
     description: '',
   };
 
-  trackingCode() {
-    return ({ __html:
-      `(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=` +
-      `function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;` +
-      `e=o.createElement(i);r=o.getElementsByTagName(i)[0];` +
-      `e.src='https://www.google-analytics.com/analytics.js';` +
-      `r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));` +
-      `ga('create','${googleAnalyticsId}','auto');ga('send','pageview');`,
-    });
-  }
-
   render() {
     return (
-      <html className="no-js" lang="">
+      <html className="no-js" lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <title>{this.props.title}</title>
-        <meta name="description" content={this.props.description} />
+        <title>{ (this.props.title || 'React auth kit') }</title>
+        <meta name="description" content={ (this.props.description || 'Ract app authorization with altjs, iso, flux, passportjs and server side rendering') } />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro|Lato' rel='stylesheet' type='text/css' />
         <style id="css" dangerouslySetInnerHTML={{ __html: this.props.css }} />
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{ __html: this.props.body }} />
         <script src={this.props.entry}></script>
-        <script dangerouslySetInnerHTML={this.trackingCode()} />
       </body>
       </html>
     );

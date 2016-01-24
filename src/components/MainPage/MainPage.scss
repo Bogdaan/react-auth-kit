@@ -1,0 +1,39 @@
+
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.container {
+  font-size: 1.5rem;
+}
+
+.columns {
+  @mixin clearfix;
+}
+
+.columnInfo {
+  float: left;
+  width: 60%;
+}
+
+.columnButtons {
+  float: right;
+  width: 40%;
+}
+
+
+.authBtn {
+  display: block;
+  padding: 1.3rem;
+  text-align: center;
+
+  margin-bottom: 2rem;
+  border: 1px solid white;
+  border-radius: 2px;
+
+  transition: background .3s ease;
+
+  &:hover {
+    text-decoration: none;
+    background: #3A3A3A;
+  }
+}

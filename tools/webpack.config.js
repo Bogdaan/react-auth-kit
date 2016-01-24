@@ -88,7 +88,7 @@ const config = {
         loader: 'raw-loader',
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=10000',
+        loader: 'url-loader?limit=' + (DEBUG? '9999999': '10000'),
       }, {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',

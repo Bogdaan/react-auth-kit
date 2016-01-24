@@ -1,17 +1,11 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
 
 import React, { Component, PropTypes } from 'react';
+import Link from '../Link'
+
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './NotFoundPage.scss';
 
-const title = 'Page Not Found';
+const title = 'Oops, page not found';
 
 class NotFoundPage extends Component {
 
@@ -27,9 +21,10 @@ class NotFoundPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className={s.notFound}>
         <h1>{title}</h1>
         <p>Sorry, but the page you were trying to view does not exist.</p>
+        <p>Please, try to <Link to='/'>start from main page</Link></p>
       </div>
     );
   }

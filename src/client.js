@@ -1,14 +1,8 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
 
 import 'babel-polyfill';
 import ReactDOM from 'react-dom';
+import Iso from 'iso';
+import alt from './core/alt';
 import FastClick from 'fastclick';
 import Router from './routes';
 import Location from './core/Location';
@@ -37,6 +31,12 @@ const context = {
 
 function render(state) {
   Router.dispatch(state, (newState, component) => {
+
+    if (typeof newState.redirect != 'undefined') {
+      Location.push(newState.redirect)
+      return
+    }
+
     ReactDOM.render(component, appContainer, () => {
       // Restore the scroll position if it was saved into the state
       if (state.scrollY !== undefined) {
@@ -61,6 +61,11 @@ function run() {
 
   // Make taps on links and buttons work fast on mobiles
   FastClick.attach(document.body);
+
+  // Setup the client-side stores with the same data the server had
+  Iso.bootstrap((state, meta, node) => {
+    alt.bootstrap(state);
+  });
 
   // Re-render the app when window.location changes
   const unlisten = Location.listen(location => {

@@ -13,13 +13,19 @@ $gray-lighter:          color(black lightness(+93.5%)); /* #eee */
  * Typography
  * ========================================================================== */
 
-$font-family-base:      'Segoe UI', 'HelveticaNeue-Light', sans-serif;
+$font-family-base:      'Lato', 'HelveticaNeue-Light', sans-serif;
+$font-code-base:        'CodePro', 'Times New Roman', serif;
 
 /*
  * Layout
  * ========================================================================== */
 
-$max-content-width:     1000px;
+$max-content-width:     500px;
+$content-background:    rgba(0,0,0, 0.69);
+$content-hl-background: rgba(0,0,0, 0.72);
+$content-padding:       4%;
+$content-padding-rem:   4rem;
+
 
 /*
  * Media queries breakpoints

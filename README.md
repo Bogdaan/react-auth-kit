@@ -15,11 +15,12 @@ Packages:
 * altjs - unidirection data flow
 * iso - pass data to client
 * passport - auth framework
-* passport-facebook
-* passport-twitter
-* passport-google-oauth
-* express-session
+* passport-facebook - atuh from facebook
+* passport-twitter - atuh from twitter
+* passport-google-oauth - atuh from google plus
+* express-session - session support for express
 * cookie-parser
+* postcss-custom-media - for css media queries
 
 
 ### Directory Layout
@@ -37,7 +38,7 @@ Packages:
 │   ├── /stores/                # Stores contain the application state and logic
 │   ├── /client.js              # Client-side startup script
 │   ├── /config.js              # Global application settings
-│   ├── /config.server.js       # PRIVATE server config
+│   ├── /config.server.js       # private server-only config
 │   ├── /routes.js              # Universal (isomorphic) application routes
 │   └── /server.js              # Server-side startup script
 ├── /tools/                     # Build automation scripts and utilities
@@ -55,4 +56,4 @@ Packages:
 └── preprocessor.js             # ES6 transpiler settings for Jest
 ```
 
-Code base - [React Starter Kit](https://github.com/kriasoft/react-starter-kit/)
+Code base: [React Starter Kit](https://github.com/kriasoft/react-starter-kit/)

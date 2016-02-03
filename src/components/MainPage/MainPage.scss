@@ -20,6 +20,18 @@
   width: 40%;
 }
 
+@media (--screen-xs) {
+  .columnInfo,
+  .columnButtons {
+    float: none;
+    width: auto;
+  }
+
+  .columnButtons {
+    margin: 30px 0 0;
+  }
+}
+
 
 .authBtn {
   display: block;
@@ -30,10 +42,18 @@
   border: 1px solid white;
   border-radius: 2px;
 
+  color: white;
   transition: background .3s ease;
 
   &:hover {
     text-decoration: none;
     background: #3A3A3A;
+  }
+}
+
+.usage {
+  pre {
+    background: black;
+    padding: 8px;
   }
 }

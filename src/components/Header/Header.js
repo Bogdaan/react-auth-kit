@@ -17,7 +17,7 @@ class Header extends Component {
         <div className={s.nav}>
           <Link className={s.navItem} to='/private'>private</Link>
           <a className={s.navItem} href='http://hcbogdan.com'>blog</a>
-          <a className={s.navItem} href='https://github.com' target='_blank'>source on github</a>
+          <a className={s.navItem} href='https://github.com/Bogdaan/react-auth-kit' target='_blank'>source on github</a>
         </div>
       </div>
     );

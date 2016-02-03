@@ -1,4 +1,3 @@
-
 @import '../variables.scss';
 @import '../mixins.scss';
 
@@ -17,7 +16,8 @@
 
 .columnButtons {
   float: right;
-  width: 40%;
+  width: 35%;
+  margin-left: 5%;
 }
 
 @media (--screen-xs) {

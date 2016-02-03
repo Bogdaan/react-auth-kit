@@ -116,9 +116,18 @@ passport.use(new passportTwitter.Strategy({
 //
 // place in config etc.
 //
-const routeToLogin = '/login'
-const routeToPrivate = '/private'
+const routeToLogin = '/login';
+const routeToPrivate = '/private';
 
+
+const socialUserRedirect = function(req, res) {
+  if (typeof req.user != 'undefined') {
+    req.query.user = req.user
+    res.cookie('user', JSON.stringify(req.user));
+  }
+
+  return res.redirect(routeToPrivate);
+};
 
 
 
@@ -135,9 +144,7 @@ server.get('/auth/google/callback',
       next();
     })(req, res, next);
   },
-  function(req, res) {
-    return res.redirect(routeToPrivate);
-  });
+  socialUserRedirect);
 
 
 // GET /auth/fb
@@ -153,9 +160,7 @@ server.get('/auth/fb/callback',
       next();
     })(req, res, next);
   },
-  function(req, res) {
-    return res.redirect(routeToPrivate);
-  });
+  socialUserRedirect);
 
 
 // GET /auth/tw
@@ -171,9 +176,7 @@ server.get('/auth/tw/callback',
       next();
     })(req, res, next);
   },
-  function(req, res) {
-    return res.redirect(routeToPrivate);
-  });
+  socialUserRedirect);
 
 
 
@@ -182,6 +185,14 @@ server.get('/auth/tw/callback',
 // Register Node.js middleware
 // -----------------------------------------------------------------------------
 server.use(express.static(path.join(__dirname, 'public')));
+
+
+// close session
+server.get('/logout', function(req, res) {
+  res.clearCookie('user');
+  return res.redirect('/');
+})
+
 
 //
 // Register server-side rendering middleware
@@ -213,7 +224,7 @@ server.get('*', async (req, res, next) => {
       }
 
       const iso = new Iso();
-      
+
       iso.add(
         ReactDOM.renderToString(component),
         alt.flush()
@@ -238,6 +249,5 @@ server.get('*', async (req, res, next) => {
 // Launch the server
 // -----------------------------------------------------------------------------
 server.listen(port, () => {
-  /* eslint-disable no-console */
   console.log(`The server is running at http://localhost:${port}/`);
 });

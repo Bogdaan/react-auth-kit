@@ -1,0 +1,11 @@
+[
+  "create tests",
+  "resolve issues",
+  "migrate to fetch api",
+  "add more examples",
+  "add ODM support + passport-local",
+  "upgrade build process",
+  "migrate to react-router",
+  "play with code-spliting",
+  "add alt-utils, connectToStore etc."
+]

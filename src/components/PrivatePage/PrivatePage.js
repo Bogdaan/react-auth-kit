@@ -17,9 +17,30 @@ class PrivatePage extends Component {
   }
 
   render() {
+    const profile = this.props.userProfile
+
     return (
       <div className={s.root}>
-      nope
+        <h1>This is example of prtected page.</h1>
+        <p>You profile info:</p>
+        <table>
+          <tr>
+            <td>Provider</td>
+            <td>{profile.service}</td>
+          </tr>
+          <tr>
+            <td>Avatar</td>
+            <td><img src={profile.logo} alt='my logo' /></td>
+          </tr>
+          <tr>
+            <td>Person</td>
+            <td>{profile.personname}</td>
+          </tr>
+          <tr>
+            <td>Access token:</td>
+            <td>{profile.token}</td>
+          </tr>
+        </table>
       </div>
     );
   }

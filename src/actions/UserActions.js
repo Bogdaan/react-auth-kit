@@ -1,5 +1,8 @@
 import alt from '../core/alt'
 
+/**
+ * user profile info
+ */
 class UserActions {
   constructor() {
     this.generateActions(

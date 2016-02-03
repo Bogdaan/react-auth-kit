@@ -11,37 +11,34 @@ function withAuth(ComposedComponent) {
   return class AuthenticatedComponent extends Component {
 
     constructor() {
-      super();
-      this.state = this._getLoginState();
+      super()
+      this.state = this.getLoginState()
     }
 
-    _getLoginState() {
+    getLoginState() {
       return {
         isUserLoggedIn: UserStore.isLoggedIn(),
         userProfile: UserStore.getProfile(),
       };
     }
 
-    // Here, we’re subscribing to changes in the LoginStore we created before.
-    //  Remember that the LoginStore is an EventEmmiter.
     componentDidMount() {
-      if(ee.canUseDom)
-        UserStore.addChangeListener(this._onChange.bind(this));
-    }
-
-    // After any change, we update the component’s state so that
-    // it’s rendered again.
-    _onChange() {
-      this.setState(this._getLoginState());
+      UserStore.listen(this.onChange.bind(this))
     }
 
     componentWillUnmount() {
-      if(ee.canUseDom)
-        UserStore.removeChangeListener(this._onChange.bind(this));
+      UserStore.unlisten(this.onChange.bind(this))
+    }
+
+    onChange() {
+      this.setState(this.getLoginState())
     }
 
     render() {
-      return <ComposedComponent {...this.props} {...this.state} />
+      return <ComposedComponent
+        {...this.props}
+        {...this.state}
+      />
     }
 
   }

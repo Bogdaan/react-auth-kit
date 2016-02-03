@@ -7,26 +7,48 @@ import NotFoundPage from './components/NotFoundPage'
 import ErrorPage from './components/ErrorPage'
 
 import MainPage from './components/MainPage'
+import LoginPage from './components/LoginPage'
 import PrivatePage from './components/PrivatePage'
 
+import UserActions from './actions/UserActions'
 import UserStore from './stores/UserStore'
 
 
 const router = new Router(on => {
 
   on('*', async (state, next) => {
+    if (state.user) {
+      UserActions.login(state.user);
+    }
+
     const component = await next();
     return component && <App context={state.context}>{component}</App>;
   });
 
+  //
   on('/', async () => <MainPage />);
 
-  // protect auth
+  //
+  on('/login', async(state) => {
+    if (UserStore.isLoggedIn()) {
+      state.redirect = '/private';
+      return;
+    }
+
+    return <LoginPage />
+  });
+
+  //
   on('/private', async (state, next) => {
     if (!UserStore.isLoggedIn()) {
-      state.redirect = '/login'
-      return
+      state.redirect = '/login';
+      return;
     }
+
+    const TodoStore = require('./stores/TodoStore');
+
+    await TodoStore.fetchList()
+
     return <PrivatePage />
   });
 

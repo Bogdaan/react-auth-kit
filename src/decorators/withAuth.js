@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 
 import UserStore from '../stores/UserStore'
 
-//
-// add props to component:
-// isUserLoggedIn
-// userProfile
-//
+/**
+ * add props to component:
+ * isUserLoggedIn
+ * userProfile
+ *
+ */
 function withAuth(ComposedComponent) {
   return class AuthenticatedComponent extends Component {
 
@@ -18,7 +19,7 @@ function withAuth(ComposedComponent) {
     getLoginState() {
       return {
         isUserLoggedIn: UserStore.isLoggedIn(),
-        userProfile: UserStore.getProfile(),
+        userProfile: UserStore.getUser(),
       };
     }
 

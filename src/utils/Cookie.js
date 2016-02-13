@@ -32,7 +32,7 @@ export default {
       return undefined;
 
     try {
-      result = JSON.parse(result);
+      return JSON.parse(result);
     } catch (e) {
       // empty
     }

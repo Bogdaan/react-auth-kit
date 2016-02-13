@@ -1,7 +1,9 @@
 import alt from '../core/alt'
 import UserActions from '../actions/UserActions'
 
-
+/**
+ * user profile and operations
+ */
 class UserStore {
 
   constructor() {

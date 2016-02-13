@@ -7,6 +7,7 @@
   "dependencies": {
     "alt": "^0.18.1",
     "axios": "^0.9.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-polyfill": "^6.3.14",
     "babel-runtime": "^6.3.19",
     "bluebird": "3.1.1",
@@ -64,9 +65,9 @@
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
     "postcss": "^5.0.14",
+    "postcss-custom-media": "^5.0.0",
     "postcss-import": "^7.1.3",
     "postcss-loader": "^0.8.0",
-    "postcss-custom-media": "^5.0.0",
     "precss": "^1.4.0",
     "raw-loader": "^0.5.1",
     "react-transform-catch-errors": "^1.0.1",
@@ -96,6 +97,7 @@
     "bundle": "babel-node tools/run bundle",
     "build": "babel-node tools/run build",
     "deploy": "babel-node tools/run deploy",
-    "start": "babel-node tools/run start"
+    "start": "babel-node tools/run start",
+    "generate": "babel-node tools/run generate"
   }
 }

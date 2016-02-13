@@ -9,9 +9,12 @@ Features:
 * altjs / flux power
 * withAuth decorator
 * server side rendering
+* component generator and some utils
+* support decorators with babel6
 
 Packages:
 
+* flux
 * altjs - unidirection data flow
 * iso - pass data to client
 * passport - auth framework
@@ -21,6 +24,15 @@ Packages:
 * express-session - session support for express
 * cookie-parser
 * postcss-custom-media - for css media queries
+* babel-plugin-transform-decorators-legacy - for decorators
+
+
+## Documentation
+* [Configure project](https://github.com/Bogdaan/react-auth-kit/docs/init-config.md)
+* [Generate component](https://github.com/Bogdaan/react-auth-kit/docs/generate-component.md)
+* [React starter kit documentation](https://github.com/kriasoft/react-starter-kit/docs/)
+* [Altjs docs](http://alt.js.org/)
+* [Passportjs docs](http://passportjs.org/)
 
 
 ### Directory Layout
@@ -34,6 +46,7 @@ Packages:
 │   ├── /actions/               # Action creators that allow to trigger a dispatch to stores
 │   ├── /components/            # React components
 │   ├── /core/                  # Core framework and utility functions
+│   ├── /decorators/            # Component decorators
 │   ├── /public/                # Static files which are copied into the /build/public folder
 │   ├── /stores/                # Stores contain the application state and logic
 │   ├── /client.js              # Client-side startup script
@@ -43,6 +56,7 @@ Packages:
 │   └── /server.js              # Server-side startup script
 ├── /tools/                     # Build automation scripts and utilities
 │   ├── /lib/                   # Library for utility snippets
+│   ├── /templates/             # Template for generators
 │   ├── /build.js               # Builds the project from source to output (build) folder
 │   ├── /bundle.js              # Bundles the web resources into package(s) through Webpack
 │   ├── /clean.js               # Cleans up the output (build) folder

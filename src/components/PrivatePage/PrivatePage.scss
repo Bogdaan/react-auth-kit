@@ -1,0 +1,18 @@
+
+.root {
+  font-size: 1.5rem;
+
+  table {
+    max-width: 100%;
+
+    td {
+      padding: 5px 10px;
+      max-width: 311px;
+      word-break: break-all;
+
+      &:first-child {
+        text-align: right;
+      }
+    }
+  }
+}

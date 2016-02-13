@@ -21,8 +21,8 @@ let TodoSource = {
         return null
       },
 
-      loading: TodoActions.fetch,
-      success: TodoActions.update,
+      loading: TodoActions.update,
+      success: TodoActions.fetch,
       error:   TodoActions.failed,
     }
   }

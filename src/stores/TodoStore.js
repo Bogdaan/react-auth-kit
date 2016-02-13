@@ -1,5 +1,6 @@
 import alt from '../core/alt'
 import TodoActions from '../actions/TodoActions'
+import TodoSource from '../sources/TodoSource'
 
 /**
  * just example of data store
@@ -11,17 +12,22 @@ class TodoStore {
     this.errorMessage = null
 
     this.todos = []
+
     this.bindActions(TodoActions)
+    this.exportAsync(TodoSource)
   }
 
   onFetch(data) {
-    this.loading = false
-    this.errorMessage = null
-
-    this.todos = data
+    if (data === false) {
+      this.onFailed()
+    } else {
+      this.loading = false
+      this.errorMessage = null
+      this.todos = data
+    }
   }
 
-  onFailed() {
+  onFailed(err) {
     this.loading = false
     this.errorMessage = 'Sory, todo list unavailable'
   }
@@ -32,11 +38,11 @@ class TodoStore {
   }
 
   onAdd() {
-    // orm logic
+    // api logic
   }
 
   onRemove() {
-    // orm logic
+    // api logic
   }
 }
 

@@ -1,7 +1,6 @@
 [
   "create tests",
   "resolve issues",
-  "migrate to fetch api",
   "add more examples",
   "add ODM support + passport-local",
   "upgrade build process",

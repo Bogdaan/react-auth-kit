@@ -54,8 +54,14 @@ class MainPage extends Component {
           <p>Install node_modules with dev dependencies:</p>
           <pre>npm install --dev</pre>
 
-          <p>If all went well, start dev server:</p>
+          <p>Create you configuration:</p>
+          <pre>cp src/src/config.server.example.js src/config.server.js && vim src/src/config.server.js</pre>
+
+          <p>If all ok, start dev server:</p>
           <pre>npm start</pre>
+
+          <p>Generate React component:</p>
+          <pre>npm run generate --name MyAwesomeComponent</pre>
         </div>
 
       </div>

@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom/server';
 import Router from './routes';
 import Html from './components/Html';
 import assets from './assets';
-import { port } from './config';
+import { port, hostAddress } from './config';
 
 import serverConfig from './config.server.js'
 import alt from './core/alt'
@@ -24,13 +24,15 @@ import passportTwitter from 'passport-twitter'
 const server = global.server = express();
 
 
-//
-// auth-middleware
-//
+// auth-cookie
 server.use(cookieParser());
-server.use(expressSession({ secret: serverConfig.crypto }));
+server.use(expressSession({
+  secret: serverConfig.crypto,
+  cookie: { secure: false },
+}));
 server.use(passport.initialize());
 server.use(passport.session());
+
 
 
 //
@@ -61,6 +63,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(obj, done) {
   // TODO stirict by user_id in real apps
+  // WARNING check obj
   done(null, obj);
 });
 
@@ -73,7 +76,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new passportGoogle.OAuth2Strategy({
     clientID: serverConfig.GOOGLE_CLIENT_ID,
     clientSecret: serverConfig.GOOGLE_CLIENT_SECRET,
-    callbackURL: serverConfig.frontend + '/auth/google/callback'
+    callbackURL: hostAddress + '/auth/google/callback'
   },
   function(accessToken, refreshToken, profile, done) {
     profile.token = accessToken;
@@ -88,7 +91,7 @@ passport.use(new passportGoogle.OAuth2Strategy({
 passport.use(new passportFb.Strategy({
     clientID: serverConfig.FACEBOOK_APP_ID,
     clientSecret: serverConfig.FACEBOOK_APP_SECRET,
-    callbackURL: serverConfig.frontend + '/auth/fb/callback',
+    callbackURL: hostAddress + '/auth/fb/callback',
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
@@ -104,7 +107,7 @@ passport.use(new passportFb.Strategy({
 passport.use(new passportTwitter.Strategy({
     consumerKey: serverConfig.TWITTER_CONSUMER_KEY,
     consumerSecret: serverConfig.TWITTER_CONSUMER_SECRET,
-    callbackURL: serverConfig.frontend + '/auth/tw/callback',
+    callbackURL: hostAddress + '/auth/tw/callback',
   },
   function(token, tokenSecret, profile, done) {
     profile.token = token + '||' + tokenSecret;
@@ -135,16 +138,10 @@ const socialUserRedirect = function(req, res) {
 server.get('/auth/google',
   passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
 
-// GET /auth/google/callback
 server.get('/auth/google/callback',
-  function(req, res, next) {
-    passport.authenticate('google', function(err, user, info) {
-      if (!user || err) { return res.redirect(routeToLogin) }
-      req.user = user;
-      next();
-    })(req, res, next);
-  },
+  passport.authenticate('google'),
   socialUserRedirect);
+
 
 
 // GET /auth/fb
@@ -153,14 +150,9 @@ server.get('/auth/fb',
 
 // GET /auth/fb/callback
 server.get('/auth/fb/callback',
-  function(req, res, next) {
-    passport.authenticate('facebook', function(err, user, info) {
-      if (!user || err) { return res.redirect(routeToLogin) }
-      req.user = user;
-      next();
-    })(req, res, next);
-  },
+  passport.authenticate('facebook'),
   socialUserRedirect);
+
 
 
 // GET /auth/tw
@@ -169,22 +161,9 @@ server.get('/auth/tw',
 
 // GET /auth/tw/callback
 server.get('/auth/tw/callback',
-  function(req, res, next) {
-    passport.authenticate('twitter', function(err, user, info) {
-      if (!user || err) { return res.redirect(routeToLogin) }
-      req.user = user;
-      next();
-    })(req, res, next);
-  },
+  passport.authenticate('twitter'),
   socialUserRedirect);
 
-
-
-
-//
-// Register Node.js middleware
-// -----------------------------------------------------------------------------
-server.use(express.static(path.join(__dirname, 'public')));
 
 
 // close session
@@ -194,9 +173,11 @@ server.get('/logout', function(req, res) {
 })
 
 
-//
+// static files
+server.use(express.static(path.join(__dirname, 'public')));
+
+
 // Register server-side rendering middleware
-// -----------------------------------------------------------------------------
 server.get('*', async (req, res, next) => {
   try {
     let statusCode = 200;
@@ -214,6 +195,7 @@ server.get('*', async (req, res, next) => {
     await Router.dispatch({
       path: req.path,
       query: req.query,
+      user: req.user,
       context
     },
     (state, component) => {
@@ -224,7 +206,6 @@ server.get('*', async (req, res, next) => {
       }
 
       const iso = new Iso();
-
       iso.add(
         ReactDOM.renderToString(component),
         alt.flush()
@@ -245,9 +226,8 @@ server.get('*', async (req, res, next) => {
   }
 });
 
-//
-// Launch the server
-// -----------------------------------------------------------------------------
+
+// Launch server
 server.listen(port, () => {
   console.log(`The server is running at http://localhost:${port}/`);
 });

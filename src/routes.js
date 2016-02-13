@@ -13,6 +13,8 @@ import PrivatePage from './components/PrivatePage'
 import UserActions from './actions/UserActions'
 import UserStore from './stores/UserStore'
 
+import TodoStore from './stores/TodoStore'
+
 
 const router = new Router(on => {
 
@@ -44,8 +46,6 @@ const router = new Router(on => {
       state.redirect = '/login';
       return;
     }
-
-    const TodoStore = require('./stores/TodoStore');
 
     await TodoStore.fetchList()
 

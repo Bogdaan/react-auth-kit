@@ -1,6 +1,5 @@
 
 export default {
-  frontend: 'http://localhost:5000',
   crypto: '---- place here ----',
 
   GOOGLE_CLIENT_ID: '---- place here ----',

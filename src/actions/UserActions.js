@@ -1,7 +1,7 @@
 import alt from '../core/alt'
 
 /**
- * user profile info
+ * user profile actions
  */
 class UserActions {
   constructor() {

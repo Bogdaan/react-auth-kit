@@ -7,6 +7,7 @@ import FastClick from 'fastclick';
 import Router from './routes';
 import Location from './core/Location';
 import { addEventListener, removeEventListener } from './core/DOMUtils';
+import Cookie from './utils/Cookie'
 
 let cssContainer = document.getElementById('css');
 const appContainer = document.getElementById('app');
@@ -74,6 +75,7 @@ function run() {
       path: location.pathname,
       query: location.query,
       state: location.state,
+      user: Cookie.getObject('user'),
       context,
     });
     render(currentState);

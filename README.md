@@ -5,12 +5,11 @@ Simple authorization example with react SSR and altjs - [Live demo](http://auth.
 Features:
 
 * support router redirect
-* support auth from socaial networks and local source
+* support auth from socaial networks (and other sources, local etc.)
 * altjs / flux power
-* withAuth decorator
+* component generator
+* support decorators
 * server side rendering
-* component generator and some utils
-* support decorators with babel6
 
 Packages:
 

@@ -5,13 +5,12 @@ import { Link } from 'react-router'
 import withStyles from 'isomorphic-style-loader/lib/withStyles'
 import s from './Header.scss'
 
-
 class Header extends Component {
 
   render() {
     return (
       <div className={s.container}>
-        <Link className={s.brand} to="/">
+        <Link to='/' className={s.brand}>
           <span className={s.resourceName}>AUTH.<span className={s.resourceSmall}>HCBOGDAN</span></span>
         </Link>
         <div className={s.nav}>

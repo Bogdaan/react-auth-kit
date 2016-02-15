@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react'
 import emptyFunction from 'fbjs/lib/emptyFunction'
 
+/**
+ * Hold child countext for react-router component
+ * pass props to child routes
+ * (origin - https://github.com/flatlogic/react-starter-kit/blob/bed5f5dc418d7ac54a666a207100bb120f6f32c8/src/core/ContextHolder.js)
+ */
 class ContextHolder extends React.Component {
 
   static propTypes = {

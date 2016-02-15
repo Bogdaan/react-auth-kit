@@ -6,7 +6,6 @@
   * [Node.js](https://nodejs.org/) v5.0 or newer
   * `npm` v3.3 or newer (new to [npm](https://docs.npmjs.com/)?)
   * `node-gyp` prerequisites mentioned [here](https://github.com/nodejs/node-gyp)
-  * Text editor or IDE pre-configured with React/JSX/Flow/ESlint ([learn more](./how-to-configure-text-editors.md))
 
 ### Quick Start
 
@@ -17,13 +16,9 @@ local machine by running:
 
 ```shell
 $ git clone -o react-starter-kit -b master --single-branch \
-      https://github.com/kriasoft/react-starter-kit.git MyApp
+      https://github.com/Bogdaan/react-auth-kit.git MyApp
 $ cd MyApp
 ```
-
-Alternatively, you can start a new project based on RSK right from
-[WebStorm IDE](https://www.jetbrains.com/webstorm/help/create-new-project-react-starter-kit.html),
-or by using [Yeoman generator](https://www.npmjs.com/package/generator-react-fullstack).
 
 #### 2. Run `npm install`
 
@@ -103,7 +98,7 @@ of the `/build` folder to a remote server.
 ### How to Update
 
 If you need to keep your project up to date with the recent changes made to RSK,
-you can always fetch and merge them from [this repo](https://github.com/kriasoft/react-starter-kit)
+you can always fetch and merge them from [this repo](https://github.com/Bogdaan/react-auth-kit)
 back into your own project by running:
 
 ```shell

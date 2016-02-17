@@ -1,6 +1,6 @@
 ## React router howto
 
-This kit works on react-router, and **src/routes.js** contain all application routes
+This kit works on react-router, and `src/routes.js` contain all application routes
 plus some auth/redirect hooks. If you need place async data dependency in route,
 you need use following pattern:
 
@@ -15,12 +15,14 @@ const getCatalogPage = async (location, callback) => {
 }
 
 ...
-
+//
+// use getComponent={...} instead of component={...}
+//
 <Route path='catalogPage' getComponent={getCatalogPage} />
 ```
 
 
-If you need auth-protected page:
+If you need auth-protected page, use `onEnter` callback:
 
 ```
 ....

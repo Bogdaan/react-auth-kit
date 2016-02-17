@@ -10,6 +10,7 @@ Features:
 * component generator
 * support decorators
 * server side rendering
+* works on react-router
 
 Packages:
 
@@ -24,14 +25,22 @@ Packages:
 * cookie-parser
 * postcss-custom-media - for css media queries
 * babel-plugin-transform-decorators-legacy - for decorators
+* react-router
 
 
 ## Documentation
-* [Configure project](https://github.com/Bogdaan/react-auth-kit/docs/init-config.md)
-* [Generate component](https://github.com/Bogdaan/react-auth-kit/docs/generate-component.md)
+
+* [Configure you project](./docs/init-config.md)
+* [Generate component](./docs/generate-component.md)
+* [React-router howto](./docs/react-router-howto.md)
+* [How to create CRUD](./docs/crud.md)
+
+## Dependency docs
+
 * [React starter kit documentation](https://github.com/kriasoft/react-starter-kit/docs/)
 * [Altjs docs](http://alt.js.org/)
 * [Passportjs docs](http://passportjs.org/)
+* [React router docs](https://github.com/reactjs/react-router/tree/latest/docs)
 
 
 ### Directory Layout

@@ -49,29 +49,26 @@ function run() {
   const unlisten = Location.listen(location => {
     window.scrollTo(0, 0);
 
-    console.log(location);
+    match({ routes, location },
+      (error, redirectLocation, renderProps) => {
+        render(
+          <ContextHolder context={context}>
+            <Router
+              history={Location}
+              routes={routes}
+              {...renderProps}
+            />
+          </ContextHolder>,
+          appContainer
+        );
 
-    match({
-      routes,
-      location.pathname + location.search
-    }, (error, redirectLocation, renderProps) => {
-      render(
-        <ContextHolder context={context}>
-          <Router
-            history={Location}
-            routes={routes}
-            {...renderProps}
-          />
-        </ContextHolder>,
-        appContainer
-      );
+        // Remove the pre-rendered CSS because it's no longer used
+        if (cssContainer) {
+          cssContainer.parentNode.removeChild(cssContainer);
+          cssContainer = null;
+        }
+      }); // match-end
 
-      // Remove the pre-rendered CSS because it's no longer used
-      if (cssContainer) {
-        cssContainer.parentNode.removeChild(cssContainer);
-        cssContainer = null;
-      }
-    });
   });
 }
 

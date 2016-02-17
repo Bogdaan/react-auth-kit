@@ -2,11 +2,9 @@
 
 ### Requirements
 
-  * Mac OS X, Windows, or Linux
   * [Node.js](https://nodejs.org/) v5.0 or newer
   * `npm` v3.3 or newer (new to [npm](https://docs.npmjs.com/)?)
   * `node-gyp` prerequisites mentioned [here](https://github.com/nodejs/node-gyp)
-  * Text editor or IDE pre-configured with React/JSX/Flow/ESlint ([learn more](./how-to-configure-text-editors.md))
 
 ### Quick Start
 
@@ -17,18 +15,25 @@ local machine by running:
 
 ```shell
 $ git clone -o react-starter-kit -b master --single-branch \
-      https://github.com/kriasoft/react-starter-kit.git MyApp
+      https://github.com/Bogdaan/react-auth-kit.git MyApp
 $ cd MyApp
 ```
-
-Alternatively, you can start a new project based on RSK right from
-[WebStorm IDE](https://www.jetbrains.com/webstorm/help/create-new-project-react-starter-kit.html),
-or by using [Yeoman generator](https://www.npmjs.com/package/generator-react-fullstack).
 
 #### 2. Run `npm install`
 
 This will install both run-time project dependencies and developer tools listed
 in [package.json](../package.json) file.
+
+#### 2.1. Configure server
+
+For passportjs auth you need place tokens into `src/config.server.js` and setup
+session session secret key. You can find the template file in the
+`src/config.server.example.js`.
+
+```shell
+$ cp src/config.server.example.js src/config.server.js
+$ vim src/config.server.js
+```
 
 #### 3. Run `npm start`
 
@@ -103,7 +108,7 @@ of the `/build` folder to a remote server.
 ### How to Update
 
 If you need to keep your project up to date with the recent changes made to RSK,
-you can always fetch and merge them from [this repo](https://github.com/kriasoft/react-starter-kit)
+you can always fetch and merge them from [this repo](https://github.com/Bogdaan/react-auth-kit)
 back into your own project by running:
 
 ```shell

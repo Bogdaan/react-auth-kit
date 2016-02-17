@@ -4,7 +4,11 @@ import path from 'path';
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Router from './routes';
+
+import { match, RouterContext } from 'react-router';
+import routes from './routes';
+import ContextHolder from './core/ContextHolder';
+
 import Html from './components/Html';
 import assets from './assets';
 import { port, hostAddress } from './config';
@@ -12,12 +16,16 @@ import { port, hostAddress } from './config';
 import serverConfig from './config.server.js'
 import alt from './core/alt'
 import Iso from 'iso'
+
 import expressSession from 'express-session'
 import cookieParser from 'cookie-parser'
 import passport from 'passport'
 import passportGoogle from 'passport-google-oauth'
 import passportFb from 'passport-facebook'
 import passportTwitter from 'passport-twitter'
+
+import UserActions from './actions/UserActions'
+import UserStore from './stores/UserStore'
 
 
 
@@ -125,7 +133,6 @@ const routeToPrivate = '/private';
 
 const socialUserRedirect = function(req, res) {
   if (typeof req.user != 'undefined') {
-    req.query.user = req.user
     res.cookie('user', JSON.stringify(req.user));
   }
 
@@ -180,47 +187,50 @@ server.use(express.static(path.join(__dirname, 'public')));
 // Register server-side rendering middleware
 server.get('*', async (req, res, next) => {
   try {
-    let statusCode = 200;
-    let redirectTo = '';
 
-    const data = { title: '', description: '', css: '', body: '', entry: assets.main.js };
-    const css = [];
-    const context = {
-      insertCss: styles => css.push(styles._getCss()),
-      onSetTitle: value => data.title = value,
-      onSetMeta: (key, value) => data[key] = value,
-      onPageNotFound: () => statusCode = 404,
-    };
+    // auth first
+    if (req.user) {
+      UserActions.login(req.user)
+    }
 
-    await Router.dispatch({
-      path: req.path,
-      query: req.query,
-      user: req.user,
-      context
-    },
-    (state, component) => {
+    // match routes
+    match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
-      if (typeof state.redirect != 'undefined') {
-        redirectTo = state.redirect
-        return
-      }
+      if (redirectLocation != null)
+        return res.redirect(redirectLocation.pathname);
+
+      let statusCode = 200;
+      const data = {
+        title: '',
+        description: '',
+        css: '',
+        body: '',
+        entry: assets.main.js
+      };
+      const css = [];
+      const context = {
+        insertCss: styles => css.push(styles._getCss()),
+        onSetTitle: value => data.title = value,
+        onSetMeta: (key, value) => data[key] = value,
+        onPageNotFound: () => statusCode = 404,
+      };
 
       const iso = new Iso();
       iso.add(
-        ReactDOM.renderToString(component),
+        ReactDOM.renderToString(
+          <ContextHolder context={context}>
+            <RouterContext {...renderProps} />
+          </ContextHolder>
+        ),
         alt.flush()
       );
 
       data.body = iso.render();
       data.css = css.join('');
+
+      const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
+      res.status(statusCode).send(`<!doctype html>\n${html}`);
     });
-
-    if (redirectTo.length)
-      return res.redirect(redirectTo)
-
-    const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
-    res.status(statusCode).send('<!doctype html>\n' + html);
-
   } catch (err) {
     next(err);
   }

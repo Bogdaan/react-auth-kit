@@ -3,16 +3,17 @@
 ### General
 
 * [Getting Started](./getting-started.md)
+* [Configure passportjs](./init-config.md)
 * [React Style Guide](./react-style-guide.md)
 * [How to configure text editors and IDEs](./how-to-configure-text-editors.md)
 * [Data fetching with WHATWG Fetch](./data-fetching.md)
+* [Generate component](./generate-component.md)
+* [React-router howto](./react-router-howto.md)
+* [How to create CRUD](./crud.md)
 
-### Questions
+### Dependency
 
-* [Which module bundler should I use?](https://github.com/kriasoft/react-starter-kit/issues/3)
-* [Which Flux implementation should I use?](https://github.com/kriasoft/react-starter-kit/issues/22)
-
-### Recipes
-
-* [How to Implement Routing and Navigation](./recipes/how-to-implement-routing.md)
-* [How to Integrate Disqus](./recipes/how-to-integrate-disqus.md)
+* [React starter kit documentation](https://github.com/kriasoft/react-starter-kit/docs/)
+* [Altjs docs](http://alt.js.org/)
+* [Passportjs docs](http://passportjs.org/)
+* [React router docs](https://github.com/reactjs/react-router/tree/latest/docs)

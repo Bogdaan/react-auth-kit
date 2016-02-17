@@ -1,63 +1,68 @@
+import React from 'react'
+import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
+import { IndexRoute, Route } from 'react-router'
 
-import React from 'react';
-import Router from 'react-routing/src/Router';
-import App from './components/App';
-
-import NotFoundPage from './components/NotFoundPage'
-import ErrorPage from './components/ErrorPage'
-
+import App from './components/App'
 import MainPage from './components/MainPage'
 import LoginPage from './components/LoginPage'
 import PrivatePage from './components/PrivatePage'
+import NotFoundPage from './components/NotFoundPage'
 
+import Cookie from './utils/Cookie'
 import UserActions from './actions/UserActions'
 import UserStore from './stores/UserStore'
-
 import TodoStore from './stores/TodoStore'
 
-
-const router = new Router(on => {
-
-  on('*', async (state, next) => {
-    if (state.user) {
-      UserActions.login(state.user);
+/**
+ * setup UserStore from cookie
+ */
+const performAuth = (nextState, replace) => {
+  if (canUseDOM && !UserStore.isLoggedIn()) {
+    const userInfo = Cookie.getObject('user')
+    if (userInfo) {
+      UserActions.login(userInfo)
     }
+  }
+}
 
-    const component = await next();
-    return component && <App context={state.context}>{component}</App>;
-  });
+/**
+ * force auth redirect
+ */
+const requireAuth = (nextState, replace) => {
+  if (!UserStore.isLoggedIn()) {
+    replace({
+      pathname: '/login'
+    })
+  }
+};
 
-  //
-  on('/', async () => <MainPage />);
+/**
+ * force back, when already logged in
+ */
+const authCheck = (nextState, replace) => {
+  if (UserStore.isLoggedIn()) {
+    replace({
+      pathname: '/private'
+    })
+  }
+};
 
-  //
-  on('/login', async(state) => {
-    if (UserStore.isLoggedIn()) {
-      state.redirect = '/private';
-      return;
-    }
+/**
+ * prefetch todo list
+ */
+const getPrivatePage = async (location, callback) => {
+  await TodoStore.fetchList();
+  callback(null, () => <PrivatePage />);
+}
 
-    return <LoginPage />
-  });
-
-  //
-  on('/private', async (state, next) => {
-    if (!UserStore.isLoggedIn()) {
-      state.redirect = '/login';
-      return;
-    }
-
-    await TodoStore.fetchList()
-
-    return <PrivatePage />
-  });
-
-  //
-  on('error', (state, error) => state.statusCode === 404 ?
-    <App context={state.context} error={error}><NotFoundPage /></App> :
-    <App context={state.context} error={error}><ErrorPage /></App>
-  );
-
-});
-
-export default router;
+/**
+ * all routes
+ */
+export default (
+  <Route component={App} onEnter={performAuth}>
+    <Route path='/' component={MainPage} />
+    <Route path='login' component={LoginPage} onEnter={authCheck} />
+    <Route path='private' getComponent={getPrivatePage} onEnter={requireAuth} />
+    <Route path='*' component={NotFoundPage} />
+  </Route>
+);

@@ -6,8 +6,7 @@ import alt from '../core/alt'
 class UserActions {
   constructor() {
     this.generateActions(
-      'login',
-      'setup'
+      'login'
     );
   }
 }

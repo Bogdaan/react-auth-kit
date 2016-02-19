@@ -4,7 +4,7 @@
   "add more examples",
   "add ODM support + passport-local",
   "upgrade build process",
-  "migrate to react-router",
   "play with code-spliting",
-  "add alt-utils, connectToStore etc."
+  "add alt-utils, connectToStore etc.",
+  "add more generators",
 ]

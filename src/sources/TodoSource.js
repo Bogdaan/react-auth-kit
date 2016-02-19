@@ -16,11 +16,6 @@ let TodoSource = {
         return (state.todos.length == 0)
       },
 
-      // local source - disabled
-      local(state) {
-        return null
-      },
-
       loading: TodoActions.update,
       success: TodoActions.fetch,
       error:   TodoActions.failed,

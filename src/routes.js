@@ -18,7 +18,7 @@ import TodoStore from './stores/TodoStore'
  */
 const performAuth = (nextState, replace) => {
   if (canUseDOM && !UserStore.isLoggedIn()) {
-    const userInfo = Cookie.getObject('user')
+    const userInfo = Cookie.getObject('user');
     if (userInfo) {
       UserActions.login(userInfo)
     }
@@ -30,9 +30,7 @@ const performAuth = (nextState, replace) => {
  */
 const requireAuth = (nextState, replace) => {
   if (!UserStore.isLoggedIn()) {
-    replace({
-      pathname: '/login'
-    })
+    replace({ pathname: '/login' });
   }
 };
 
@@ -41,26 +39,27 @@ const requireAuth = (nextState, replace) => {
  */
 const authCheck = (nextState, replace) => {
   if (UserStore.isLoggedIn()) {
-    replace({
-      pathname: '/private'
-    })
+    replace({ pathname: '/private' });
   }
 };
 
 /**
  * prefetch todo list
  */
-const getPrivatePage = async (location, callback) => {
-  await TodoStore.fetchList();
-  callback(null, () => <PrivatePage />);
+const getPrivatePage = (location, callback) => {
+  TodoStore
+  .fetchList()
+  .then(() => {
+    callback(null, () => <PrivatePage />);
+  });
 }
 
 /**
  * all routes
  */
 export default (
-  <Route component={App} onEnter={performAuth}>
-    <Route path='/' component={MainPage} />
+  <Route path='/' component={App} onEnter={performAuth}>
+    <IndexRoute component={MainPage} />
     <Route path='login' component={LoginPage} onEnter={authCheck} />
     <Route path='private' getComponent={getPrivatePage} onEnter={requireAuth} />
     <Route path='*' component={NotFoundPage} />

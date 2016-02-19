@@ -29,6 +29,7 @@
     "passport-facebook": "^2.0.0",
     "passport-google-oauth": "^0.2.0",
     "passport-twitter": "^1.0.3",
+    "postcss-scss": "^0.1.5",
     "react": "0.14.7",
     "react-dom": "0.14.7",
     "react-router": "2.0.0",

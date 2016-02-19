@@ -196,8 +196,9 @@ server.get('*', async (req, res, next) => {
     // match routes
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
 
-      if (redirectLocation != null)
+      if (redirectLocation != null) {
         return res.redirect(redirectLocation.pathname);
+      }
 
       let statusCode = 200;
       const data = {

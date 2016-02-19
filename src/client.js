@@ -51,13 +51,14 @@ function run() {
 
     match({ routes, location },
       (error, redirectLocation, renderProps) => {
+
         render(
           <ContextHolder context={context}>
             <Router
               history={Location}
               routes={routes}
               {...renderProps}
-            />
+             />
           </ContextHolder>,
           appContainer
         );

@@ -33,7 +33,7 @@ html {
 }
 
 
-@media (--screen-xs) {
+@media ($--screen-xs) {
   .appContainer {
     padding: 1rem;
   }

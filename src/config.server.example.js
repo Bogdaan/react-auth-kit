@@ -10,4 +10,4 @@ export default {
 
   TWITTER_CONSUMER_KEY: '---- place here ----',
   TWITTER_CONSUMER_SECRET: '---- place here ----',
-}
+};

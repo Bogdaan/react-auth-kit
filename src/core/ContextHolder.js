@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-import emptyFunction from 'fbjs/lib/emptyFunction'
+import React, { PropTypes } from 'react';
+import emptyFunction from 'fbjs/lib/emptyFunction';
 
 /**
  * Hold child countext for react-router component

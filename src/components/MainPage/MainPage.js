@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './MainPage.scss';
 
@@ -37,9 +36,9 @@ class MainPage extends Component {
           </div>
 
           <div className={s.columnButtons}>
-            <a className={s.authBtn} href='/auth/google'>Auth with Gooogle</a>
-            <a className={s.authBtn} href='/auth/fb'>Auth with Facebook</a>
-            <a className={s.authBtn} href='/auth/tw'>Auth with Twitter</a>
+            <a className={s.authBtn} href="/auth/google">Auth with Gooogle</a>
+            <a className={s.authBtn} href="/auth/fb">Auth with Facebook</a>
+            <a className={s.authBtn} href="/auth/tw">Auth with Twitter</a>
           </div>
         </div>
 
@@ -57,7 +56,8 @@ class MainPage extends Component {
           <pre>npm install --dev</pre>
 
           <p>Create you configuration:</p>
-          <pre>cp src/src/config.server.example.js src/config.server.js && vim src/src/config.server.js</pre>
+          <pre>cp src/src/config.server.example.js src/config.server.js
+            && vim src/src/config.server.js</pre>
 
           <p>If all ok, start dev server:</p>
           <pre>npm start</pre>

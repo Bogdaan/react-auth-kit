@@ -1,9 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import emptyFunction from 'fbjs/lib/emptyFunction';
 import s from './App.scss';
-
-import Header from '../Header'
-
+import Header from '../Header';
 
 class App extends Component {
 
@@ -28,7 +25,7 @@ class App extends Component {
     return (
       <div className={s.appContainer}>
       {
-        (!this.props.error?
+        (!this.props.error ?
           <div className={s.appContainerInner}>
             <Header />
             {this.props.children}
@@ -36,7 +33,7 @@ class App extends Component {
         : <div className={s.appContainerInner}>{this.props.children}</div>)
       }
       </div>
-    )
+    );
   }
 
 }

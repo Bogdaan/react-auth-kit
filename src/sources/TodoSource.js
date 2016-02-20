@@ -1,26 +1,26 @@
 
-import Api from '../services/Api'
-import TodoActions from '../actions/TodoActions'
+import Api from '../services/Api';
+import TodoActions from '../actions/TodoActions';
 
 /**
  * remote-local data source with actions
  */
-let TodoSource = {
+const TodoSource = {
   fetchList() {
     return {
-      async remote(state) {
-        return Api.getTodoList()
+      async remote() {
+        return Api.getTodoList();
       },
 
       shouldFetch(state) {
-        return (state.todos.length == 0)
+        return (state.todos.length === 0);
       },
 
       loading: TodoActions.update,
       success: TodoActions.fetch,
-      error:   TodoActions.failed,
-    }
-  }
+      error: TodoActions.failed,
+    };
+  },
 };
 
-export default TodoSource
+export default TodoSource;

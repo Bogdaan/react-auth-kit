@@ -1,6 +1,6 @@
-import alt from '../core/alt'
-import TodoActions from '../actions/TodoActions'
-import TodoSource from '../sources/TodoSource'
+import alt from '../core/alt';
+import TodoActions from '../actions/TodoActions';
+import TodoSource from '../sources/TodoSource';
 
 /**
  * just example of data store
@@ -14,27 +14,27 @@ class TodoStore {
     this.todos = [];
 
     this.bindActions(TodoActions);
-    this.exportAsync(TodoSource)
+    this.exportAsync(TodoSource);
   }
 
   onFetch(data) {
     if (data === false) {
-      this.onFailed()
+      this.onFailed();
     } else {
       this.loading = false;
       this.errorMessage = null;
-      this.todos = data
+      this.todos = data;
     }
   }
 
-  onFailed(err) {
+  onFailed() {
     this.loading = false;
-    this.errorMessage = 'Sory, todo list unavailable'
+    this.errorMessage = 'Sory, todo list unavailable';
   }
 
   onUpdate() {
     this.loading = false;
-    this.errorMessage = null
+    this.errorMessage = null;
   }
 
   onAdd() {
@@ -46,4 +46,4 @@ class TodoStore {
   }
 }
 
-export default alt.createStore(TodoStore, 'TodoStore')
+export default alt.createStore(TodoStore, 'TodoStore');

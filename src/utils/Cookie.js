@@ -1,4 +1,4 @@
-import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
+import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
 export default {
 
@@ -9,27 +9,28 @@ export default {
     if (days) {
       const date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toGMTString();
+      expires = `; expires=${date.toGMTString()}`;
     }
 
-    document.cookie = name + "=" + value + expires + "; path=/";
+    document.cookie = `${name}=${value}${expires}; path=/`;
 
     return this;
   },
 
   getRaw(name) {
     if (!canUseDOM) return '';
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
+    const regexString = `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`;
+
+    const matches = document.cookie.match(new RegExp(regexString));
     return matches ? decodeURIComponent(matches[1]) : undefined;
   },
 
   getObject(name) {
-    let result = this.getRaw(name);
+    const result = this.getRaw(name);
 
-    if (!result)
+    if (!result) {
       return undefined;
+    }
 
     try {
       return JSON.parse(result);
@@ -38,5 +39,5 @@ export default {
     }
 
     return undefined;
-  }
-}
+  },
+};

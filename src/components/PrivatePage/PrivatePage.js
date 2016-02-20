@@ -15,7 +15,7 @@ class PrivatePage extends Component {
   };
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = TodoStore.getState()
   };
 
@@ -36,7 +36,7 @@ class PrivatePage extends Component {
   };
 
   render() {
-    const profile = this.props.userProfile
+    const profile = this.props.userProfile;
 
     return (
       <div className={s.root}>
@@ -75,7 +75,7 @@ class PrivatePage extends Component {
   }
 
   renderTodoList() {
-    const st = this.state
+    const st = this.state;
 
     if (st.loading) {
       return <span>loading...</span>

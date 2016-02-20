@@ -15,14 +15,14 @@ class UserStore {
       personname: null,
       logo: null,
       provider: null,
-    }
+    };
 
     this.exportPublicMethods({
       isLoggedIn: this.isLoggedIn,
       getUser: this.getUser,
       getUid: this.getUid,
       getPersonName: this.getPersonName,
-    })
+    });
 
     this.bindActions(UserActions)
   }
@@ -39,7 +39,7 @@ class UserStore {
 
   // static
   isLoggedIn() {
-    let uid = this.getState().user.id
+    let uid = this.getState().user.id;
     return (uid !== null)
   }
 
@@ -50,13 +50,13 @@ class UserStore {
 
   // static
   getUid() {
-    let st = this.getState().user
+    let st = this.getState().user;
     return st.id
   }
 
   // static
   getPersonName() {
-    let st = this.getState().user
+    let st = this.getState().user;
     return st.personname
   }
 }

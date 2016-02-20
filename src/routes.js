@@ -23,7 +23,7 @@ const performAuth = (nextState, replace) => {
       UserActions.login(userInfo)
     }
   }
-}
+};
 
 /**
  * force auth redirect
@@ -52,7 +52,7 @@ const getPrivatePage = (location, callback) => {
   .then(() => {
     callback(null, () => <PrivatePage />);
   });
-}
+};
 
 /**
  * all routes

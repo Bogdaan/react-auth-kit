@@ -53,13 +53,13 @@ const getInfoFromUser = function(user) {
     name: user.displayName,
     logo: '',
     token: user.token,
-  }
+  };
 
   if (typeof user.photos != 'undefined')
-    info.logo = user.photos[0].value || ''
+    info.logo = user.photos[0].value || '';
 
   return info
-}
+};
 
 
 //
@@ -177,7 +177,7 @@ server.get('/auth/tw/callback',
 server.get('/logout', function(req, res) {
   res.clearCookie('user');
   return res.redirect('/');
-})
+});
 
 
 // static files

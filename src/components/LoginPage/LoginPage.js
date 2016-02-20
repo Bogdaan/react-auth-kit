@@ -21,9 +21,9 @@ class LoginPage extends Component {
       <div className={s.container}>
         <p>Seems you are unable to login, try again or select a different social-network</p>
         <div className={s.columnButtons}>
-          <a className={s.authBtn} href='/auth/google'>Auth with Gooogle</a>
-          <a className={s.authBtn} href='/auth/fb'>Auth with Facebook</a>
-          <a className={s.authBtn} href='/auth/tw'>Auth with Twitter</a>
+          <a className={s.authBtn} href="/auth/google">Auth with Gooogle</a>
+          <a className={s.authBtn} href="/auth/fb">Auth with Facebook</a>
+          <a className={s.authBtn} href="/auth/tw">Auth with Twitter</a>
         </div>
       </div>
     );

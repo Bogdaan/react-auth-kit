@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-
-import UserStore from '../stores/UserStore'
+import React, { Component } from 'react';
+import UserStore from '../stores/UserStore';
 
 /**
  * add props to component:
@@ -13,7 +12,7 @@ function withAuth(ComposedComponent) {
 
     constructor() {
       super();
-      this.state = this.getLoginState()
+      this.state = this.getLoginState();
     }
 
     getLoginState() {
@@ -24,25 +23,21 @@ function withAuth(ComposedComponent) {
     }
 
     componentDidMount() {
-      UserStore.listen(this.onChange.bind(this))
+      UserStore.listen(this.onChange.bind(this));
     }
 
     componentWillUnmount() {
-      UserStore.unlisten(this.onChange.bind(this))
+      UserStore.unlisten(this.onChange.bind(this));
     }
 
     onChange() {
-      this.setState(this.getLoginState())
+      this.setState(this.getLoginState());
     }
 
     render() {
-      return <ComposedComponent
-        {...this.props}
-        {...this.state}
-      />
+      return <ComposedComponent {...this.props} {...this.state} />;
     }
-
-  }
+  };
 }
 
-export default withAuth
+export default withAuth;

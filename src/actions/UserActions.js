@@ -1,4 +1,4 @@
-import alt from '../core/alt'
+import alt from '../core/alt';
 
 /**
  * user profile actions
@@ -11,4 +11,4 @@ class UserActions {
   }
 }
 
-export default alt.createActions(UserActions)
+export default alt.createActions(UserActions);

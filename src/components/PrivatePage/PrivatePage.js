@@ -1,14 +1,18 @@
 
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react';
 
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import s from './PrivatePage.scss'
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './PrivatePage.scss';
 
-import TodoStore from '../../stores/TodoStore'
-import withAuth from '../../decorators/withAuth'
+import TodoStore from '../../stores/TodoStore';
+import withAuth from '../../decorators/withAuth';
 
 @withAuth
 class PrivatePage extends Component {
+
+  static propTypes = {
+    userProfile: PropTypes.object,
+  };
 
   static contextTypes = {
     onSetTitle: PropTypes.func.isRequired,
@@ -16,24 +20,50 @@ class PrivatePage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = TodoStore.getState()
-  };
+    this.state = TodoStore.getState();
+  }
 
   componentWillMount() {
-    this.context.onSetTitle('Hello ' + this.props.userProfile.name)
-  };
+    this.context.onSetTitle(`Hello ${this.props.userProfile.name}`);
+  }
 
   componentDidMount() {
-    TodoStore.listen(this.onChange)
-  };
+    TodoStore.listen(this.onChange);
+  }
 
   componentWillUnmount() {
-    TodoStore.unlisten(this.onChange)
-  };
+    TodoStore.unlisten(this.onChange);
+  }
 
   onChange = (state) => {
-    this.setState(state)
-  };
+    this.setState(state);
+  }
+
+  renderTodoList() {
+    const st = this.state;
+
+    if (st.loading) {
+      return <span>loading...</span>;
+    }
+
+    if (st.errorMessage) {
+      return <span>{st.errorMessage}</span>;
+    }
+
+    if (st.todos.length === 0) {
+      return <span>list is empty</span>;
+    }
+
+    return (
+      <ul>
+      {
+        st.todos.map((item, idx) => { // eslint-disable-line arrow-body-style
+          return <li key={idx}>{item}</li>;
+        })
+      }
+      </ul>
+    );
+  }
 
   render() {
     const profile = this.props.userProfile;
@@ -54,7 +84,7 @@ class PrivatePage extends Component {
           </tr>
           <tr>
             <td>Avatar</td>
-            <td><img src={profile.logo} alt='my logo' /></td>
+            <td><img src={profile.logo} alt="my logo" /></td>
           </tr>
           <tr>
             <td>Person</td>
@@ -73,33 +103,6 @@ class PrivatePage extends Component {
       </div>
     );
   }
-
-  renderTodoList() {
-    const st = this.state;
-
-    if (st.loading) {
-      return <span>loading...</span>
-    }
-
-    if (st.errorMessage) {
-      return <span>{st.errorMessage}</span>
-    }
-
-    if (st.todos.length == 0) {
-      return <span>list is empty</span>
-    }
-
-    return (
-      <ul>
-        {
-          st.todos.map((item, idx) => {
-            return <li key={idx}>{item}</li>
-          })
-        }
-      </ul>
-    )
-  }
-
 }
 
 export default withStyles(PrivatePage, s);

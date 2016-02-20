@@ -13,22 +13,21 @@ import Html from './components/Html';
 import assets from './assets';
 import { port, hostAddress } from './config';
 
-import serverConfig from './config.server.js'
-import alt from './core/alt'
-import Iso from 'iso'
+import serverConfig from './config.server.js';
+import alt from './core/alt';
+import Iso from 'iso';
 
-import expressSession from 'express-session'
-import cookieParser from 'cookie-parser'
-import passport from 'passport'
-import passportGoogle from 'passport-google-oauth'
-import passportFb from 'passport-facebook'
-import passportTwitter from 'passport-twitter'
+import expressSession from 'express-session';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import passportGoogle from 'passport-google-oauth';
+import passportFb from 'passport-facebook';
+import passportTwitter from 'passport-twitter';
 
-import UserActions from './actions/UserActions'
-import UserStore from './stores/UserStore'
-
+import UserActions from './actions/UserActions';
 
 
+// init server
 const server = global.server = express();
 
 
@@ -42,103 +41,98 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 
-
 //
 // info from request user
 //
-const getInfoFromUser = function(user) {
-  var info = {
+const getInfoFromUser = function setupUserInfo(user) {
+  /* eslint-disable prefer-const */
+  let info = {
     id: user.id,
     provider: user.provider,
     name: user.displayName,
     logo: '',
     token: user.token,
   };
+  /* eslint-enable prefer-const */
 
-  if (typeof user.photos != 'undefined')
+  if (typeof user.photos !== 'undefined') {
     info.logo = user.photos[0].value || '';
+  }
 
-  return info
+  return info;
 };
 
 
 //
 // Passport session setup.
 //
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser((obj, done) => {
   // TODO stirict by user_id in real apps
   // WARNING check obj
   done(null, obj);
 });
 
 
-
-
 //
 // GoogleStrategy within Passport
 //
 passport.use(new passportGoogle.OAuth2Strategy({
-    clientID: serverConfig.GOOGLE_CLIENT_ID,
-    clientSecret: serverConfig.GOOGLE_CLIENT_SECRET,
-    callbackURL: hostAddress + '/auth/google/callback'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    profile.token = accessToken;
-    return done(null, getInfoFromUser(profile));
-  }
-));
+  clientID: serverConfig.GOOGLE_CLIENT_ID,
+  clientSecret: serverConfig.GOOGLE_CLIENT_SECRET,
+  callbackURL: `${hostAddress}/auth/google/callback`,
+}, (accessToken, refreshToken, profile, done) => {
+  const result = Object.assign(profile, { token: accessToken });
+  return done(null, getInfoFromUser(result));
+}));
 
 
 //
 // FB within Passport
 //
 passport.use(new passportFb.Strategy({
-    clientID: serverConfig.FACEBOOK_APP_ID,
-    clientSecret: serverConfig.FACEBOOK_APP_SECRET,
-    callbackURL: hostAddress + '/auth/fb/callback',
-    enableProof: false
-  },
-  function(accessToken, refreshToken, profile, done) {
-    profile.token = accessToken;
-    return done(null, getInfoFromUser(profile));
-  }
-));
+  clientID: serverConfig.FACEBOOK_APP_ID,
+  clientSecret: serverConfig.FACEBOOK_APP_SECRET,
+  callbackURL: `${hostAddress}/auth/fb/callback`,
+  enableProof: false,
+}, (accessToken, refreshToken, profile, done) => {
+  const result = Object.assign(profile, { token: accessToken });
+  return done(null, getInfoFromUser(result));
+}));
 
 
 //
 // Twitter within Passport
 //
 passport.use(new passportTwitter.Strategy({
-    consumerKey: serverConfig.TWITTER_CONSUMER_KEY,
-    consumerSecret: serverConfig.TWITTER_CONSUMER_SECRET,
-    callbackURL: hostAddress + '/auth/tw/callback',
-  },
-  function(token, tokenSecret, profile, done) {
-    profile.token = token + '||' + tokenSecret;
-    return done(null, getInfoFromUser(profile));
-  }
-));
+  consumerKey: serverConfig.TWITTER_CONSUMER_KEY,
+  consumerSecret: serverConfig.TWITTER_CONSUMER_SECRET,
+  callbackURL: `${hostAddress}/auth/tw/callback`,
+}, (token, tokenSecret, profile, done) => {
+  const result = Object.assign(profile, { token: `${token}||${tokenSecret}` });
+  return done(null, getInfoFromUser(result));
+}));
 
 
 //
 // place in config etc.
+// const routeToLogin = '/login';
 //
-const routeToLogin = '/login';
 const routeToPrivate = '/private';
 
-
-const socialUserRedirect = function(req, res) {
-  if (typeof req.user != 'undefined') {
+/**
+ * redirect users and setup cookie
+ */
+const socialUserRedirect = (req, res) => {
+  if (typeof req.user !== 'undefined') {
     res.cookie('user', JSON.stringify(req.user));
   }
 
   return res.redirect(routeToPrivate);
 };
-
 
 
 // GET /auth/google
@@ -148,7 +142,6 @@ server.get('/auth/google',
 server.get('/auth/google/callback',
   passport.authenticate('google'),
   socialUserRedirect);
-
 
 
 // GET /auth/fb
@@ -161,7 +154,6 @@ server.get('/auth/fb/callback',
   socialUserRedirect);
 
 
-
 // GET /auth/tw
 server.get('/auth/tw',
   passport.authenticate('twitter'));
@@ -172,31 +164,32 @@ server.get('/auth/tw/callback',
   socialUserRedirect);
 
 
-
+//
 // close session
-server.get('/logout', function(req, res) {
+//
+server.get('/logout', (req, res) => {
   res.clearCookie('user');
   return res.redirect('/');
 });
 
-
+//
 // static files
+//
 server.use(express.static(path.join(__dirname, 'public')));
 
-
+//
 // Register server-side rendering middleware
+//
 server.get('*', async (req, res, next) => {
   try {
-
     // auth first
     if (req.user) {
-      UserActions.login(req.user)
+      UserActions.login(req.user);
     }
 
     // match routes
     match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
-
-      if (redirectLocation != null) {
+      if (redirectLocation !== null) {
         return res.redirect(redirectLocation.pathname);
       }
 
@@ -206,7 +199,7 @@ server.get('*', async (req, res, next) => {
         description: '',
         css: '',
         body: '',
-        entry: assets.main.js
+        entry: assets.main.js,
       };
       const css = [];
       const context = {
@@ -236,7 +229,6 @@ server.get('*', async (req, res, next) => {
     next(err);
   }
 });
-
 
 // Launch server
 server.listen(port, () => {

@@ -1,4 +1,4 @@
-import alt from '../core/alt'
+import alt from '../core/alt';
 
 /**
  * operations with todo

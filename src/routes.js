@@ -1,26 +1,26 @@
-import React from 'react'
-import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
-import { IndexRoute, Route } from 'react-router'
+import React from 'react';
+import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
+import { IndexRoute, Route } from 'react-router';
 
-import App from './components/App'
-import MainPage from './components/MainPage'
-import LoginPage from './components/LoginPage'
-import PrivatePage from './components/PrivatePage'
-import NotFoundPage from './components/NotFoundPage'
+import App from './components/App';
+import MainPage from './components/MainPage';
+import LoginPage from './components/LoginPage';
+import PrivatePage from './components/PrivatePage';
+import NotFoundPage from './components/NotFoundPage';
 
-import Cookie from './utils/Cookie'
-import UserActions from './actions/UserActions'
-import UserStore from './stores/UserStore'
-import TodoStore from './stores/TodoStore'
+import Cookie from './utils/Cookie';
+import UserActions from './actions/UserActions';
+import UserStore from './stores/UserStore';
+import TodoStore from './stores/TodoStore';
 
 /**
  * setup UserStore from cookie
  */
-const performAuth = (nextState, replace) => {
+const performAuth = () => {
   if (canUseDOM && !UserStore.isLoggedIn()) {
     const userInfo = Cookie.getObject('user');
     if (userInfo) {
-      UserActions.login(userInfo)
+      UserActions.login(userInfo);
     }
   }
 };
@@ -55,10 +55,10 @@ const getPrivatePage = async (location, callback) => {
  * all routes
  */
 export default (
-  <Route path='/' component={App} onEnter={performAuth}>
+  <Route path="/" component={App} onEnter={performAuth}>
     <IndexRoute component={MainPage} />
-    <Route path='login' component={LoginPage} onEnter={authCheck} />
-    <Route path='private' getComponent={getPrivatePage} onEnter={requireAuth} />
-    <Route path='*' component={NotFoundPage} />
+    <Route path="login" component={LoginPage} onEnter={authCheck} />
+    <Route path="private" getComponent={getPrivatePage} onEnter={requireAuth} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );

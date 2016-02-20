@@ -87,7 +87,7 @@ const config = {
         loader: 'raw-loader',
       }, {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
-        loader: 'url-loader?limit=' + (DEBUG? '9999999': '10000'),
+        loader: `url-loader?limit=${DEBUG ? '9999999' : '10000'}`,
       }, {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',
@@ -113,7 +113,7 @@ const clientConfig = extend(true, {}, config, {
   output: {
     path: path.join(__dirname, '../build/public'),
 
-    publicPath: DEBUG ? 'http://localhost:5000/': '/',
+    publicPath: DEBUG ? 'http://localhost:5000/' : '/',
 
     filename: DEBUG ? '[name].js?[hash]' : '[name].[hash].js',
   },

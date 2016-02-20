@@ -1,5 +1,5 @@
-import axios from 'axios'
-import { hostAddress } from '../config'
+import axios from 'axios';
+import { hostAddress } from '../config';
 
 /**
  * remote XMLHttpRequest api methods
@@ -14,15 +14,15 @@ export default {
     try {
       const resp = await axios.get(`${hostAddress}/todo.list.json`);
 
-      if (resp.status!==200) {
-        result = false
+      if (resp.status !== 200) {
+        result = false;
       } else {
-        result = resp.data
+        result = resp.data;
       }
-    } catch(e) {
-      result = false
+    } catch (e) {
+      result = false;
     }
 
-    return result
-  }
-}
+    return result;
+  },
+};

@@ -1,22 +1,25 @@
 
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-import withStyles from 'isomorphic-style-loader/lib/withStyles'
-import s from './Header.scss'
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Header.scss';
 
 class Header extends Component {
 
   render() {
     return (
       <div className={s.container}>
-        <Link to='/' className={s.brand}>
-          <span className={s.resourceName}>AUTH.<span className={s.resourceSmall}>HCBOGDAN</span></span>
+        <Link to="/" className={s.brand}>
+          <span className={s.resourceName}>
+            <span>AUTH.</span>
+            <span className={s.resourceSmall}>HCBOGDAN</span>
+          </span>
         </Link>
         <div className={s.nav}>
-          <Link className={s.navItem} to='/private'>private</Link>
-          <a className={s.navItem} href='http://hcbogdan.com'>blog</a>
-          <a className={s.navItem} href='https://github.com/Bogdaan/react-auth-kit' target='_blank'>source on github</a>
+          <Link className={s.navItem} to="/private">private</Link>
+          <a className={s.navItem} href="http://hcbogdan.com">blog</a>
+          <a className={s.navItem} href="https://github.com/Bogdaan/react-auth-kit" target="_blank">source on github</a>
         </div>
       </div>
     );

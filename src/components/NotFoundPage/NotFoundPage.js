@@ -1,6 +1,6 @@
 
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './NotFoundPage.scss';
@@ -24,7 +24,7 @@ class NotFoundPage extends Component {
       <div className={s.notFound}>
         <h1>{title}</h1>
         <p>Sorry, but the page you were trying to view does not exist.</p>
-        <p>Please, try to <Link to='/'>start from main page</Link></p>
+        <p>Please, try to <Link to="/">start from main page</Link></p>
       </div>
     );
   }

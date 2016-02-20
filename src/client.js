@@ -6,12 +6,12 @@ import Iso from 'iso';
 import alt from './core/alt';
 
 import Location from './core/Location';
-import { match, Router } from 'react-router';
+import { Router } from 'react-router';
 import routes from './routes';
 
 import FastClick from 'fastclick';
 import ContextHolder from './core/ContextHolder';
-import { addEventListener } from './core/DOMUtils';
+import { addEventListener } from './core/DOMUtils'; // eslint-disable-line no-unused-vars
 
 
 let cssContainer = document.getElementById('css');
@@ -40,12 +40,12 @@ function run() {
   FastClick.attach(document.body);
 
   // Setup the client-side stores with the same data the server had
-  Iso.bootstrap((state, meta, node) => {
+  Iso.bootstrap((state) => {
     alt.bootstrap(state);
   });
 
   // Re-render the app when window.location changes
-  const unlisten = Location.listen(location => {
+  Location.listen(() => {
     window.scrollTo(0, 0);
 
     render(
@@ -61,7 +61,6 @@ function run() {
 
   // Remove the pre-rendered CSS because it's no longer used
   if (cssContainer) {
-    console.log('remove css')
     cssContainer.parentNode.removeChild(cssContainer);
     cssContainer = null;
   }

@@ -3,7 +3,7 @@ import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment'
 export default {
 
   write(name, value, days) {
-    if (!canUseDOM) return this
+    if (!canUseDOM) return this;
 
     let expires = '';
     if (days) {
@@ -18,7 +18,7 @@ export default {
   },
 
   getRaw(name) {
-    if (!canUseDOM) return ''
+    if (!canUseDOM) return '';
     let matches = document.cookie.match(new RegExp(
       "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
     ));

@@ -23,7 +23,7 @@ const performAuth = (nextState, replace) => {
       UserActions.login(userInfo)
     }
   }
-}
+};
 
 /**
  * force auth redirect
@@ -49,7 +49,7 @@ const authCheck = (nextState, replace) => {
 const getPrivatePage = async (location, callback) => {
   await TodoStore.fetchList();
   callback(null, () => <PrivatePage />);
-}
+};
 
 /**
  * all routes

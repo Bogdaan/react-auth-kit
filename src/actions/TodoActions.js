@@ -16,4 +16,4 @@ class TodoActions {
   }
 }
 
-export default alt.createActions(TodoActions)
+export default alt.createActions(TodoActions);

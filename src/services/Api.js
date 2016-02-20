@@ -9,10 +9,10 @@ import { hostAddress } from '../config'
  */
 export default {
   async getTodoList() {
-    let result = []
+    let result = [];
 
     try {
-      const resp = await axios.get(`${hostAddress}/todo.list.json`)
+      const resp = await axios.get(`${hostAddress}/todo.list.json`);
 
       if (resp.status!==200) {
         result = false

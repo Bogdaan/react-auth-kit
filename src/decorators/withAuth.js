@@ -12,7 +12,7 @@ function withAuth(ComposedComponent) {
   return class AuthenticatedComponent extends Component {
 
     constructor() {
-      super()
+      super();
       this.state = this.getLoginState()
     }
 

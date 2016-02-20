@@ -8,12 +8,12 @@ import TodoSource from '../sources/TodoSource'
 class TodoStore {
 
   constructor() {
-    this.loading = true
-    this.errorMessage = null
+    this.loading = true;
+    this.errorMessage = null;
 
-    this.todos = []
+    this.todos = [];
 
-    this.bindActions(TodoActions)
+    this.bindActions(TodoActions);
     this.exportAsync(TodoSource)
   }
 
@@ -21,19 +21,19 @@ class TodoStore {
     if (data === false) {
       this.onFailed()
     } else {
-      this.loading = false
-      this.errorMessage = null
+      this.loading = false;
+      this.errorMessage = null;
       this.todos = data
     }
   }
 
   onFailed(err) {
-    this.loading = false
+    this.loading = false;
     this.errorMessage = 'Sory, todo list unavailable'
   }
 
   onUpdate() {
-    this.loading = false
+    this.loading = false;
     this.errorMessage = null
   }
 

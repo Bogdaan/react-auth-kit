@@ -36,7 +36,6 @@ const context = {
 };
 
 function run() {
-
   // Make taps on links and buttons work fast on mobiles
   FastClick.attach(document.body);
 
@@ -49,28 +48,23 @@ function run() {
   const unlisten = Location.listen(location => {
     window.scrollTo(0, 0);
 
-    match({ routes, location },
-      (error, redirectLocation, renderProps) => {
-
-        render(
-          <ContextHolder context={context}>
-            <Router
-              history={Location}
-              routes={routes}
-              {...renderProps}
-             />
-          </ContextHolder>,
-          appContainer
-        );
-
-        // Remove the pre-rendered CSS because it's no longer used
-        if (cssContainer) {
-          cssContainer.parentNode.removeChild(cssContainer);
-          cssContainer = null;
-        }
-      }); // match-end
-
+    render(
+      <ContextHolder context={context}>
+        <Router
+          history={Location}
+          routes={routes}
+        />
+      </ContextHolder>,
+      appContainer
+    );
   });
+
+  // Remove the pre-rendered CSS because it's no longer used
+  if (cssContainer) {
+    console.log('remove css')
+    cssContainer.parentNode.removeChild(cssContainer);
+    cssContainer = null;
+  }
 }
 
 // Run the application when both DOM is ready and page content is loaded

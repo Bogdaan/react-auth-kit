@@ -10,6 +10,7 @@
 * [Generate component](./generate-component.md)
 * [React-router howto](./react-router-howto.md)
 * [How to create CRUD](./crud.md)
+* [Configure and setup own server](./docs/local-server.md)
 
 ### Dependency
 

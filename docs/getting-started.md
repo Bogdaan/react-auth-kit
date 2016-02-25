@@ -69,7 +69,7 @@ $ npm run build
 or, for a production build:
 
 ```shell
-$ npm run build -- --release
+$ BABEL_ENV=production npm run build -- --release
 ```
 
 After running this command, the `/build` folder will contain the compiled

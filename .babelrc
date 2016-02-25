@@ -7,5 +7,14 @@
   "plugins": [
     "transform-runtime",
     "transform-decorators-legacy"
-  ]
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types",
+        "transform-react-constant-elements",
+        "transform-react-inline-elements"
+      ]
+    }
+  }
 }

@@ -34,6 +34,7 @@ Packages:
 * [Generate component](./docs/generate-component.md)
 * [React-router howto](./docs/react-router-howto.md)
 * [How to create CRUD](./docs/crud.md)
+* [Configure and setup own server](./docs/local-server.md)
 
 ## Dependency docs
 

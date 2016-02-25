@@ -113,7 +113,7 @@ const clientConfig = extend(true, {}, config, {
   output: {
     path: path.join(__dirname, '../build/public'),
 
-    publicPath: DEBUG ? 'http://localhost:5000/' : '/',
+    publicPath: DEBUG ? 'http://localhost:3000/' : '/',
 
     filename: DEBUG ? '[name].js?[hash]' : '[name].[hash].js',
   },

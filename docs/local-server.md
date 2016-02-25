@@ -39,15 +39,17 @@ I chose `pm2`:
 $ npm install pm2 -g
 ```
 
-Next you need build you app and upload on server, for example to `/var/www/myapp` (better to use git hooks or npm task for this).
+Next you need build you app and upload on server, for example to `/var/www/myapp`
+(better to use git hooks or npm task for this).
 
 ```
-$ npm run build -- --production && rsync . to@my.host:/var/www/myapp
+$ BABEL_ENV=production npm run build -- --release && rsync . to@my.host:/var/www/myapp
 ```
 
 If you app successfully loaded, configure you process manager and start application:
-```
-web@server:/var/www/myapp# PORT=5000 NAME=awesomeapp.com pm2 add --name "my-awesome-app" ./build/server.js
+
+```shell
+web@server:/var/www/myapp# NODE_ENV=production PORT=5000 NAME=awesomeapp.com pm2 add --name "my-awesome-app" ./build/server.js
 
 ┌─────────────────┬────┬──────┬───────┬────────┬─────────┬────────┬─────────────┬──────────┐
 │ App name        │ id │ mode │ pid   │ status │ restart │ uptime │ memory      │ watching │
@@ -57,7 +59,8 @@ web@server:/var/www/myapp# PORT=5000 NAME=awesomeapp.com pm2 add --name "my-awes
 
 ```
 
-We specified port and application name in the environment variables (NAME and PORT).
+Please note that we have specified `NODE_ENV=production` and other environment
+variables (NAME and PORT).
 
 Next you need web server, such as:
 

@@ -70,7 +70,7 @@ class PrivatePage extends Component {
 
     return (
       <div className={s.root}>
-        <h1>This is example of prtected page</h1>
+        <h1>This is example of protected page</h1>
         <p>You profile info:</p>
         <table>
         <tbody>

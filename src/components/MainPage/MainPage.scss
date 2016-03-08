@@ -21,7 +21,7 @@
   margin-top: 15px;
 }
 
-@media ($--screen-xs) {
+@media screen and (max-width: $--screen-xs) {
   .columnInfo,
   .columnButtons {
     float: none;
@@ -30,6 +30,17 @@
 
   .columnButtons {
     margin: 30px 0 0;
+  }
+}
+
+
+@media screen and (min-width: $--screen-lg) {
+  .columns {
+    float: right;
+    width: 50%;
+    padding: 15px;
+    margin: 3% 0 3% 3%;
+    background: #505353;
   }
 }
 

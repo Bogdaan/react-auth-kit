@@ -20,7 +20,9 @@ class MainPage extends Component {
 
         <div className={s.columns}>
           <div className={s.columnInfo}>
-            <p>This kit is based on <a href="https://github.com/kriasoft/react-starter-kit">React starter kit</a>, but provide some features "out the box":</p>
+            <p>React auth kit is boilerplate for web development based
+              on <a href="https://github.com/kriasoft/react-starter-kit">React starter kit</a>,
+              but provide some features "out the box":</p>
 
             <ul>
               <li>authorization</li>
@@ -29,9 +31,10 @@ class MainPage extends Component {
               <li>css media queries</li>
               <li>decorators</li>
               <li>component generator</li>
+              <li>sass for styles</li>
             </ul>
 
-            <p>See more information on <a href="https://github.com/Bogdaan/react-auth-kit">github page</a>.</p>
+            <p>Try to login with the auth buttons or read more information on <a href="https://github.com/Bogdaan/react-auth-kit">github page</a>.</p>
           </div>
 
           <div className={s.columnButtons}>

@@ -16,6 +16,8 @@ Features:
 * support decorators
 * server side rendering
 * works on react-router
+* support sass styles
+
 
 Packages:
 
@@ -31,7 +33,7 @@ Packages:
 * postcss-custom-media - for css media queries
 * babel-plugin-transform-decorators-legacy - for decorators
 * react-router
-
+* node-sass, sass-loader - for styles
 
 ## Documentation
 

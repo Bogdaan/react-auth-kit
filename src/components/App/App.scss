@@ -33,9 +33,15 @@ html {
 }
 
 
-@media ($--screen-xs) {
+@media screen and (max-width: $--screen-xs) {
   .appContainer {
     padding: 1rem;
+  }
+}
+
+@media screen and (min-width: $--screen-lg) {
+  .appContainerInner {
+    max-width: 1100px;
   }
 }
 

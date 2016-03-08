@@ -17,11 +17,12 @@ class MainPage extends Component {
   render() {
     return (
       <div className={s.container}>
-        <h1>{title}</h1>
 
         <div className={s.columns}>
           <div className={s.columnInfo}>
-            <p>This kit is based on <a href="https://github.com/kriasoft/react-starter-kit">React starter kit</a>, but provide some features "out the box":</p>
+            <p>React auth kit is boilerplate for web development based
+              on <a href="https://github.com/kriasoft/react-starter-kit">React starter kit</a>,
+              but provide some features "out the box":</p>
 
             <ul>
               <li>authorization</li>
@@ -30,9 +31,10 @@ class MainPage extends Component {
               <li>css media queries</li>
               <li>decorators</li>
               <li>component generator</li>
+              <li>sass for styles</li>
             </ul>
 
-            <p>See more information on <a href="https://github.com/Bogdaan/react-auth-kit">github page</a>.</p>
+            <p>Try to login with the auth buttons or read more information on <a href="https://github.com/Bogdaan/react-auth-kit">github page</a>.</p>
           </div>
 
           <div className={s.columnButtons}>
@@ -56,8 +58,8 @@ class MainPage extends Component {
           <pre>npm install --dev</pre>
 
           <p>Create you configuration:</p>
-          <pre>cp src/src/config.server.example.js src/config.server.js
-            && vim src/src/config.server.js</pre>
+          <pre>cp src/config/config.server.example.js src/config/config.server.js
+            && vim src/config/config.server.js</pre>
 
           <p>If all ok, start dev server:</p>
           <pre>npm start</pre>

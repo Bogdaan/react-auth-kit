@@ -1,5 +1,8 @@
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
+/**
+ * TODO replace it with js-cookie
+ */
 export default {
 
   write(name, value, days) {

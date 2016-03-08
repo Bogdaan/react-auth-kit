@@ -11,10 +11,7 @@ class Header extends Component {
     return (
       <div className={s.container}>
         <Link to="/" className={s.brand}>
-          <span className={s.resourceName}>
-            <span>AUTH.</span>
-            <span className={s.resourceSmall}>HCBOGDAN</span>
-          </span>
+          <span className={s.resourceName} title="React auth kit">React auth kit</span>
         </Link>
         <div className={s.nav}>
           <Link className={s.navItem} to="/private">private</Link>

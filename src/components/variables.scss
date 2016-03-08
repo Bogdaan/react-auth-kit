@@ -19,6 +19,6 @@ $content-padding-rem:   4rem;
 /*
  * Media queries breakpoints
  * ========================================================================== */
-@custom-media --screen-xs (max-width: 480px);
-@custom-media --screen-md (max-width: 992px);
-@custom-media --screen-lg (min-width: 1200px);
+$--screen-xs: 480px;
+$--screen-md: 992px;
+$--screen-lg: 1200px;

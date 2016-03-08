@@ -11,9 +11,18 @@ import ContextHolder from './core/ContextHolder';
 
 import Html from './components/Html';
 import assets from './assets';
-import { port, hostAddress } from './config';
+import {
+  crypto,
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  FACEBOOK_APP_ID,
+  FACEBOOK_APP_SECRET,
+  TWITTER_CONSUMER_KEY,
+  TWITTER_CONSUMER_SECRET,
+  port,
+  hostAddress
+} from './config';
 
-import serverConfig from './config.server.js';
 import alt from './core/alt';
 import Iso from 'iso';
 
@@ -34,7 +43,7 @@ const server = global.server = express();
 // auth-cookie
 server.use(cookieParser());
 server.use(expressSession({
-  secret: serverConfig.crypto,
+  secret: crypto,
   cookie: { secure: false },
 }));
 server.use(passport.initialize());
@@ -81,8 +90,8 @@ passport.deserializeUser((obj, done) => {
 // GoogleStrategy within Passport
 //
 passport.use(new passportGoogle.OAuth2Strategy({
-  clientID: serverConfig.GOOGLE_CLIENT_ID,
-  clientSecret: serverConfig.GOOGLE_CLIENT_SECRET,
+  clientID: GOOGLE_CLIENT_ID,
+  clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: `${hostAddress}/auth/google/callback`,
 }, (accessToken, refreshToken, profile, done) => {
   const result = Object.assign(profile, { token: accessToken });
@@ -94,8 +103,8 @@ passport.use(new passportGoogle.OAuth2Strategy({
 // FB within Passport
 //
 passport.use(new passportFb.Strategy({
-  clientID: serverConfig.FACEBOOK_APP_ID,
-  clientSecret: serverConfig.FACEBOOK_APP_SECRET,
+  clientID: FACEBOOK_APP_ID,
+  clientSecret: FACEBOOK_APP_SECRET,
   callbackURL: `${hostAddress}/auth/fb/callback`,
   enableProof: false,
 }, (accessToken, refreshToken, profile, done) => {
@@ -108,8 +117,8 @@ passport.use(new passportFb.Strategy({
 // Twitter within Passport
 //
 passport.use(new passportTwitter.Strategy({
-  consumerKey: serverConfig.TWITTER_CONSUMER_KEY,
-  consumerSecret: serverConfig.TWITTER_CONSUMER_SECRET,
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
   callbackURL: `${hostAddress}/auth/tw/callback`,
 }, (token, tokenSecret, profile, done) => {
   const result = Object.assign(profile, { token: `${token}||${tokenSecret}` });

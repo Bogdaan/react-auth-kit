@@ -14,7 +14,7 @@ You can start by cloning the latest version of React Starter Kit (RSK) on your
 local machine by running:
 
 ```shell
-$ git clone -o react-starter-kit -b master --single-branch \
+$ git clone -o react-auth-kit -b master --single-branch \
       https://github.com/Bogdaan/react-auth-kit.git MyApp
 $ cd MyApp
 ```
@@ -24,15 +24,15 @@ $ cd MyApp
 This will install both run-time project dependencies and developer tools listed
 in [package.json](../package.json) file.
 
-#### 2.1. Configure server
+#### 2.1. Configure app
 
-For passportjs auth you need place tokens into `src/config.server.js` and setup
+For passportjs auth you need place tokens into `src/config/config.server.js` and setup
 session session secret key. You can find the template file in the
-`src/config.server.example.js`.
+`src/config/config.server.example.js`.
 
 ```shell
-$ cp src/config.server.example.js src/config.server.js
-$ vim src/config.server.js
+$ cp src/config/config.server.example.js src/config/config.server.js
+$ vim src/config/config.server.js
 ```
 
 #### 3. Run `npm start`

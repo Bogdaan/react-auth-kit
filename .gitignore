@@ -6,4 +6,4 @@ node_modules
 ncp-debug.log
 npm-debug.log
 
-/src/config.server.js
+/src/config/config.server.js

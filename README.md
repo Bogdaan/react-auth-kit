@@ -1,5 +1,10 @@
 ## React auth kit
 
+> React auth kit is boilerplate for web development built on:
+> babel6, webpack, flux, nodejs, browsersync.
+> This is fork of [react-starter-kit](https://github.com/kriasoft/react-starter-kit/)
+> but provide authorization and some other features (see "Features" section)
+
 Simple authorization example with react SSR and altjs - [Live demo](http://auth.hcbogdan.com)
 
 Features:
@@ -30,10 +35,9 @@ Packages:
 
 ## Documentation
 
-* [Configure you project](./docs/init-config.md)
+* [Getting started](./docs/getting-started.md)
 * [Generate component](./docs/generate-component.md)
 * [React-router howto](./docs/react-router-howto.md)
-* [How to create CRUD](./docs/crud.md)
 * [Configure and setup own server](./docs/local-server.md)
 
 ## Dependency docs
@@ -51,6 +55,9 @@ Packages:
 ├── /build/                     # The folder for compiled output
 ├── /docs/                      # Documentation files for the project
 ├── /node_modules/              # 3rd-party libraries and utilities
+├── /config/                    # app config
+│   ├── /config.client.js       # client-side config
+│   ├── /config.server.js       # server-side config
 ├── /src/                       # The source code of the application
 │   ├── /actions/               # Action creators that allow to trigger a dispatch to stores
 │   ├── /components/            # React components
@@ -59,8 +66,6 @@ Packages:
 │   ├── /public/                # Static files which are copied into the /build/public folder
 │   ├── /stores/                # Stores contain the application state and logic
 │   ├── /client.js              # Client-side startup script
-│   ├── /config.js              # Global application settings
-│   ├── /config.server.js       # private server-only config
 │   ├── /routes.js              # Universal (isomorphic) application routes
 │   └── /server.js              # Server-side startup script
 ├── /tools/                     # Build automation scripts and utilities
@@ -78,5 +83,3 @@ Packages:
 │── package.json                # The list of 3rd party libraries and utilities
 └── preprocessor.js             # ES6 transpiler settings for Jest
 ```
-
-Code base: [React Starter Kit](https://github.com/kriasoft/react-starter-kit/)

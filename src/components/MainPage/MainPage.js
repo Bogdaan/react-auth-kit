@@ -17,7 +17,6 @@ class MainPage extends Component {
   render() {
     return (
       <div className={s.container}>
-        <h1>{title}</h1>
 
         <div className={s.columns}>
           <div className={s.columnInfo}>
@@ -56,8 +55,8 @@ class MainPage extends Component {
           <pre>npm install --dev</pre>
 
           <p>Create you configuration:</p>
-          <pre>cp src/src/config.server.example.js src/config.server.js
-            && vim src/src/config.server.js</pre>
+          <pre>cp src/config/config.server.example.js src/config/config.server.js
+            && vim src/config/config.server.js</pre>
 
           <p>If all ok, start dev server:</p>
           <pre>npm start</pre>

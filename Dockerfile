@@ -1,7 +1,5 @@
 FROM node:5.10.1
 
-MAINTAINER elliott ro <elliott@techsamurais.com>
-
 # Add user
 RUN useradd --user-group --create-home --shell /bin/false app
 
